@@ -19,14 +19,18 @@ class InvalidPinCodeError(Exception):
 async def pin_code_not_found_exception_handler(request: Request, exc: PinCodeNotFoundError):
     return JSONResponse(
         status_code=404,
-        content={"message":f"pin code '{exc.pin_code}' does not exist in the database."},
-        pincode=exc.pin_code
+        content={
+            "message":f"pin code '{exc.pin_code}' does not exist in the database.",
+            "pincode": exc.pin_code
+        }
     )
 
 
 async def invalid_pin_code_exception_handler(request: Request, exc: InvalidPinCodeError):
     return JSONResponse(
         status_code=400,
-        content={"message":f"Invalid pin code '{exc.pincode}': {exc.reason}"},
-        pincode=exc.pincode
+        content={
+            "message":f"Invalid pin code '{exc.pincode}': {exc.reason}",
+            "pincode": exc.pincode
+        }
     )
